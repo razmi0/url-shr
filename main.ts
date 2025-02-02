@@ -16,11 +16,11 @@ app.route("/", page)
     })
     .get("/:key", async (c) => {
         const { key } = c.req.param();
-        const redirectUrl = (await kv.get([key])).value as string;
-        if (!redirectUrl) {
+        const url = (await kv.get([PREFIX, key])).value as string;
+        if (!url) {
             return c.json({ error: "URL not found" }, 404);
         }
-        return c.redirect(redirectUrl);
+        return c.redirect(url);
     });
 
 Deno.serve(app.fetch);
