@@ -1,7 +1,5 @@
 import { Hono } from "hono";
+import HomePage from "./src/homepage.tsx";
+import renderer from "./src/renderer.tsx";
 
-const app = new Hono();
-
-const Page = () => {};
-
-export default Page;
+export default new Hono().use(renderer).get("/", (c) => c.render(<HomePage />));
